@@ -1,3 +1,5 @@
+import { ConfigSubmarina } from "../config/ConfigSubmarina";
+
 class Submarino {
 
     private x: number;
@@ -8,9 +10,9 @@ class Submarino {
         this.y = 0;
     }
 
-    public init(size: number): void {
-        this.x = Math.floor(Math.random() * 10);
-        this.y = Math.floor(Math.random() * 10);
+    public init(config: ConfigSubmarino): void {
+        this.x = Math.floor(Math.random() * config.size);
+        this.y = Math.floor(Math.random() * config.trail);
     }
 }
 

@@ -1,9 +1,12 @@
 import { Submarino } from "./submarino/Submarino";
-import { ConfigSubmarino } from "./config/ConfigSubmarino";
+import { ConfigSubmarina } from "./config/ConfigSubmarina";
 
 const submarino : Submarino = new Submarino();
-const size : ConfigSubmarino = new ConfigSubmarino();
 
-submarino.init(size);
+
+submarino.init({
+    size: 5,
+    trail: 3
+});
 
 console.log("Submarino initialized.");
