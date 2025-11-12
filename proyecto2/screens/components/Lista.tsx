@@ -19,7 +19,7 @@ const Lista = (props: Props) => {
             <Text key={"" + props.header + item}>{item}</Text>
             <Button
                 key ={"b" + item}
-                onPress={() => }
+                onPress={() => (...props.type, payload: dispatch)}
                 title=" Borrar Alumno"
                 color="#841584"
             />
@@ -31,5 +31,5 @@ const Lista = (props: Props) => {
 }
 
 export default Lista
-
+ 
 const styles = StyleSheet.create({})

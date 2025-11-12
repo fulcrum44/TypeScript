@@ -1,31 +1,31 @@
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useContext } from 'react'
 import { AppContext } from '../context/Context';
+import InsertItem from './components/InsertItem';
+import Lista from './components/Lista';
 
 
-const Alumno = () => {
+const Proyecto = () => {
     const { state, dispatch } = useContext(AppContext);
-    const [alumno, onChangeAlumno] = React.useState("");
+    const [proyecto, onChangeProject] = React.useState("");
+
+    const insertItem = (item: String) => {
+        dispatch({ type: 'addProject', payload: item });
+    };
+
+
     return (
         <View>
             <View>
-                <TextInput
-                    onChangeText={onChangeAlumno}
-                    value={alumno}
-                />
-                <Button
-                    onPress={() => dispatch({ type: "addAlumn", payload: alumno.toString() })}
-                    title=" Agregar Alumno"
-                    color="#841584"
-                />
+                <InsertItem action={insertItem} />
                 
+                <Lista header={"a"} state={state.alumnos} dispatch={dispatch} type={"addProject"}/>
             </View>
-            <List header = 'a' state= />
             
         </View>
     )
 }
 
-export default Alumno
+export default Proyecto
 
 const styles = StyleSheet.create({})
