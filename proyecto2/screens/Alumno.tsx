@@ -20,9 +20,6 @@ const Alumno = () => {
         <View>
             <View>
                 <InsertItem action={insertItem} />
-            </View>
-
-            <View>
                 <Lista header={"a"} state={state.alumnos} action={deleteItem}/>
             </View>
         </View>

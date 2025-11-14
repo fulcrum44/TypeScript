@@ -22,8 +22,6 @@ const Proyecto = () => {
         <View>
             <View>
                 <InsertItem action={insertItem} />
-            </View>
-            <View>
                 <Lista header={"a"} state={state.proyectos} action={deleteItem}/>
             </View>
             
