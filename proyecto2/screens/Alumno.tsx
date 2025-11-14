@@ -1,41 +1,29 @@
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useContext } from 'react'
 import { AppContext } from '../context/Context';
-
+import InsertItem from './components/InsertItem';
+import Lista from './components/Lista';
 
 const Alumno = () => {
     const { state, dispatch } = useContext(AppContext);
     const [alumno, onChangeAlumno] = React.useState("");
+
+    const insertItem = (item: String) => {
+        dispatch({ type: 'addAlumn', payload: item });
+    };
+
+     const deleteItem = (item: String) => {
+        dispatch({ type: 'deleteAlumn', payload: item });
+    };
+
     return (
         <View>
             <View>
-                <TextInput
-                    onChangeText={onChangeAlumno}
-                    value={alumno}
-                />
-                <Button
-                    onPress={() => dispatch({ type: "addAlumn", payload: alumno.toString() })}
-                    title=" Agregar Alumno"
-                    color="#841584"
-                />
-                
+                <InsertItem action={insertItem} />
             </View>
 
             <View>
-                {
-                state.alumnos.map((item) => {
-                return (
-                    <View>
-                        <Text key={"a" + item}>{item}</Text>
-                        <Button
-                            key ={"b" + item}
-                            onPress={() => dispatch({ type: "deleteAlumn", payload: alumno.toString() })}
-                            title=" Borrar Alumno"
-                            color="#841584"
-                        />
-                    </View>
-                )
-                })}
+                <Lista header={"a"} state={state.alumnos} action={deleteItem}/>
             </View>
         </View>
     )

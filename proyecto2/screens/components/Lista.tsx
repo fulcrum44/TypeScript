@@ -5,8 +5,7 @@ import { Action } from '../../context/Context'
 interface Props {
   header: String,
   state: String[],
-  dispatch: React.Dispatch<Action>
-  type: Action
+  action: (item: String) => void
 }
 
 const Lista = (props: Props) => {
@@ -19,7 +18,7 @@ const Lista = (props: Props) => {
             <Text key={"" + props.header + item}>{item}</Text>
             <Button
                 key ={"b" + item}
-                onPress={() => (...props.type, payload: dispatch)}
+                onPress={() => {props.action(item)}}
                 title=" Borrar Alumno"
                 color="#841584"
             />

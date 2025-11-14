@@ -13,13 +13,18 @@ const Proyecto = () => {
         dispatch({ type: 'addProject', payload: item });
     };
 
+     const deleteItem = (item: String) => {
+        dispatch({ type: 'deleteProject', payload: item });
+    };
+
 
     return (
         <View>
             <View>
                 <InsertItem action={insertItem} />
-                
-                <Lista header={"a"} state={state.alumnos} dispatch={dispatch} type={"addProject"}/>
+            </View>
+            <View>
+                <Lista header={"a"} state={state.proyectos} action={deleteItem}/>
             </View>
             
         </View>

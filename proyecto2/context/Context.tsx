@@ -10,7 +10,7 @@ export type Action =
     | { type: "addAlumn" ; payload: String }
     | { type: "deleteAlumn" ; payload: String }
     | { type: "addProject" ; payload: String }
-    | { type: "delteProject" ; payload: String }
+    | { type: "deleteProject" ; payload: String }
 
 const initialState: State = {
     alumnos: [],
@@ -25,7 +25,7 @@ function reducer(state: State, action: Action): State {
             return { ...state, alumnos: state.alumnos.filter((item) => item != action.payload) };
         case "addProject":
             return { ...state, proyectos: [...state.proyectos, action.payload]};
-        case "delteProject":
+        case "deleteProject":
             return { ...state, proyectos: state.proyectos.filter((item) => item != action.payload)};
         default:
             return state;
