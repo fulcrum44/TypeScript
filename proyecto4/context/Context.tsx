@@ -1,21 +1,25 @@
-import React, { createContext, ReactNode, useReducer } from 'react'
+import React, { createContext, ReactNode, useReducer } from 'react';
 
+// 1. Define el tipo de tu estado
 type State = {
     alumnos: String[];
     proyectos: String[];
 };
 
+// 2. Define tus acciones
 export type Action =
     | { type: "addAlumn" ; payload: String }
     | { type: "deleteAlumn" ; payload: String }
     | { type: "addProject" ; payload: String }
-    | { type: "deleteProject" ; payload: String }
+    | { type: "deleteProject" ; payload: String };
 
+// 3. Define el estado inicial
 const initialState: State = {
     alumnos: [],
     proyectos: [],
 };
 
+// 4. Crea el reducer (tu lógica)
 function reducer(state: State, action: Action): State {
     switch (action.type) {
         case "addAlumn":
@@ -31,6 +35,7 @@ function reducer(state: State, action: Action): State {
     }
 }
 
+// 5. Crea el Contexto
 type AppContextProps = {
   state: State;
   dispatch: React.Dispatch<Action>;
@@ -41,6 +46,7 @@ export const AppContext = createContext<AppContextProps>({
   dispatch: () => null,
 });
 
+// 6. Crea el Proveedor (Provider)
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -50,4 +56,3 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     </AppContext.Provider>
   );
 };
-

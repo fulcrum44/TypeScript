@@ -1,9 +1,9 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { AppContext, AppProvider } from './context/Context';
-import { StatusBar } from 'expo-status-bar';
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { AppProvider } from './context/Context';
+// import { StatusBar } from 'expo-status-bar';
 import Alumno from './screens/Alumno';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Proyecto from './screens/Proyecto';
