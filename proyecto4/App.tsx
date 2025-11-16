@@ -12,16 +12,14 @@ const Stack = createNativeStackNavigator()
 
 export default function App() {
   return (
-    <View style={styles.container}>
       <AppProvider>
         <NavigationContainer>
-          <Stack.Navigator>
-          <Stack.Screen name = "Alumno" component={Alumno} />
-        </Stack.Navigator>
+          <Tab.Navigator>
+            <Tab.Screen name="Alumno" component={Alumno} />
+            <Tab.Screen name="Proyecto" component={Proyecto} />
+          </Tab.Navigator>
         </NavigationContainer>
       </AppProvider>
-      <Text>Hola</Text>
-    </View>
   );
 }
 
