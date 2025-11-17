@@ -1,28 +1,30 @@
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
 
-interface Props {
-    action: (action: String) => void
+interface Props{
+    action: (gato: String) => void 
 }
-
-const InsertItem = (props: Props) => {
+const Insert = (props: Props) => {
     const [item, onChangeItem] = React.useState('');
     return (
         <View>
-            <Text>InsertItem</Text>
+            <Text>Insert</Text>
             <TextInput
                 onChangeText={onChangeItem}
                 value={item}
+                placeholder="guitarra"
             />
+
             <Button
                 onPress={() => props.action(item.toString())}
-                title=" Agregar Alumno"
+                title="Add"
                 color="#841584"
+                accessibilityLabel="Learn more about this purple button"
             />
-    </View>
-  )
+        </View>
+    )
 }
 
-export default InsertItem
+export default Insert
 
 const styles = StyleSheet.create({})

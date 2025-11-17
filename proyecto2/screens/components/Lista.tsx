@@ -1,33 +1,32 @@
-import { Button, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { Button, FlatList, StyleSheet, Text, View } from 'react-native'
+import React, { useId } from 'react'
+import { Action } from '../../context/Context'
+import { Alumno } from '../../entities/Alumno'
+import { Proyecto } from '../../entities/Proyecto'
+import Listado from './Listado'
+
 
 interface Props {
-  header: String,
-  state: String[],
-  action: (item: String) => void
+    header: String,
+    state: Alumno[] | Proyecto[],
+    delete: (id: String) => void
 }
 
 const Lista = (props: Props) => {
   return (
     <View>
-      {
-      props.state.map((item) => {
-      return (
-          <View>
-            <Text key={"" + props.header + item}>{item}</Text>
-            <Button
-                key ={"b" + item}
-                onPress={() => {props.action(item)}}
-                title=" Borrar Alumno"
-                color="#841584"
-            />
-          </View>
-      )
-      })}
+        <FlatList
+        data={props.state}
+        renderItem={({item}) => (
+          <Listado item={item} call={props.delete}/>
+        )}
+        keyExtractor={item => item.id.toString()}
+      />
+        
     </View>
   )
 }
 
 export default Lista
- 
+
 const styles = StyleSheet.create({})
