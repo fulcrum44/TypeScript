@@ -5,8 +5,16 @@ import Lista from './components/Lista';
 
 const RandomScreen = () => {
     const { state, dispatch } = useContext(AppContext);
+    
+
     const buildGroups = ()=> {
-        let groups = null;
+        let groups = Array.from( {length: state.proyectos.length}, (_,i) => {
+            return {
+                proyecto: state.proyectos[i],
+                miembros: [] as String[]
+            }
+        });
+
         let alumnosMapper = Array.from( { length: state.alumnos.length }, (_,i) => {
             return {
                 alumno: state.alumnos[i],
@@ -30,6 +38,15 @@ const RandomScreen = () => {
         });
 
         console.log(alumnos);
+
+
+        alumnos.forEach((alumno, i) => {
+            const group = i % state.proyectos.length;
+            groups[group].miembros.push(alumno.alumno.nombre);
+        })
+        
+        console.log(groups);
+
     }
 
     return (
