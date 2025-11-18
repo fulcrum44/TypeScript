@@ -1,10 +1,11 @@
 import { Button, StyleSheet, Text, View } from 'react-native'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { AppContext } from '../context/Context';
 import Lista from './components/Lista';
 
 const RandomScreen = () => {
     const { state, dispatch } = useContext(AppContext);
+    const [ listaAlumnos, setlistaAlumnos] = useState([])
     
 
     const buildGroups = ()=> {
@@ -51,12 +52,13 @@ const RandomScreen = () => {
 
     return (
         <View>
-            <Button
-                onPress={() => buildGroups()}
-                title="Repartir"
-                color="#841584"
-                accessibilityLabel="Learn more about this purple button"
-            />
+            <FlatList
+                data={props.state}
+                renderItem={({item}) => (
+                <Listado item={item} call={props.delete}/>
+                )}
+                keyExtractor={item => item.id.toString()}
+             />
             
         </View>
     )
