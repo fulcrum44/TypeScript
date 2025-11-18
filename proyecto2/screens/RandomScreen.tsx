@@ -1,21 +1,29 @@
-import { Button, StyleSheet, Text, View } from 'react-native'
+import { Button, FlatList, StyleSheet, Text, View } from 'react-native'
 import React, { useContext, useState } from 'react'
 import { AppContext } from '../context/Context';
 import Lista from './components/Lista';
+import Listado from './components/Listado';
+import { Alumno } from '../entities/Alumno';
+import { Proyecto } from '../entities/Proyecto';
+
+interface AlumnoRandom {
+    alumno: Alumno
+    orden: number
+    usado: boolean
+}
+
+interface Grupo {
+    proyecto: Proyecto
+    miembros: Alumno[]
+}
 
 const RandomScreen = () => {
     const { state, dispatch } = useContext(AppContext);
-    const [ listaAlumnos, setlistaAlumnos] = useState([])
+    const [ listaAlumnos, setlistaAlumnos] = useState<AlumnoRandom[]>([])
+    const [ grupos, setGrupos] = useState<Grupo[]>([])
     
 
     const buildGroups = ()=> {
-        let groups = Array.from( {length: state.proyectos.length}, (_,i) => {
-            return {
-                proyecto: state.proyectos[i],
-                miembros: [] as String[]
-            }
-        });
-
         let alumnosMapper = Array.from( { length: state.alumnos.length }, (_,i) => {
             return {
                 alumno: state.alumnos[i],
@@ -40,24 +48,42 @@ const RandomScreen = () => {
 
         console.log(alumnos);
 
+        setlistaAlumnos(alumnos)
 
-        alumnos.forEach((alumno, i) => {
-            const group = i % state.proyectos.length;
-            groups[group].miembros.push(alumno.alumno.nombre);
+        let gruposMapper = Array.from( {length: state.proyectos.length}, (_,i) => {
+            return {
+                proyecto: state.proyectos[i],
+                miembros: alumnos
+            }
+        });
+
+        let grupos = gruposMapper.map( (item,) => {
+
         })
+
+
+        // alumnos.forEach((alumno, i) => {
+        //     const group = i % state.proyectos.length;
+        //     groups[group].miembros.push(alumno.alumno.nombre);
+        // })
         
-        console.log(groups);
+        // console.log(groups);
 
     }
-
+    
     return (
         <View>
+            <Button
+                onPress={buildGroups}
+                title="Repartir"
+                color="#841584"
+            />
             <FlatList
-                data={props.state}
+                data={listaAlumnos}
                 renderItem={({item}) => (
-                <Listado item={item} call={props.delete}/>
+                <Text>{item.alumno.nombre}</Text>
                 )}
-                keyExtractor={item => item.id.toString()}
+                keyExtractor={item => item.alumno.id.toString()}
              />
             
         </View>
