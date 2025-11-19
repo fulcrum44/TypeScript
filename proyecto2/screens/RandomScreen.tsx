@@ -5,6 +5,8 @@ import Lista from './components/Lista';
 import Listado from './components/Listado';
 import { Alumno } from '../entities/Alumno';
 import { Proyecto } from '../entities/Proyecto';
+import uuid from 'react-native-uuid';
+
 
 interface AlumnoRandom {
     alumno: Alumno
@@ -50,41 +52,54 @@ const RandomScreen = () => {
 
         setlistaAlumnos(alumnos)
 
-        let gruposMapper = Array.from( {length: state.proyectos.length}, (_,i) => {
+        let grupos : Grupo[] = Array.from( {length: state.proyectos.length}, (_,i) => {
             return {
                 proyecto: state.proyectos[i],
-                miembros: alumnos
+                miembros: []
             }
-        });
-
-        let grupos = gruposMapper.map( (item,) => {
-
         })
 
+        alumnos.forEach((alumno, i) => {
+            const indiceGrupo = i % grupos.length
 
-        // alumnos.forEach((alumno, i) => {
-        //     const group = i % state.proyectos.length;
-        //     groups[group].miembros.push(alumno.alumno.nombre);
-        // })
-        
-        // console.log(groups);
+            const grupoActual = grupos[indiceGrupo];
+
+            if (grupoActual.miembros.length < 2) {
+                grupoActual.miembros.push(alumno.alumno)
+            }
+        })
+
+        // console.log(grupos)
+        // El 'null, 2' es para que haga saltos de línea y sangría (pretty print)
+        // console.log(JSON.stringify(grupos, null, 2));
+
+        setGrupos(grupos);
 
     }
     
     return (
         <View>
             <Button
-                onPress={buildGroups}
+                onPress={() => buildGroups()}
                 title="Repartir"
                 color="#841584"
             />
-            <FlatList
-                data={listaAlumnos}
+            <View style={{justifyContent: 'space-evenly', margin: 10}}>
+                <FlatList
+                data={grupos}
                 renderItem={({item}) => (
-                <Text>{item.alumno.nombre}</Text>
+                <View style={styles.grupos}>
+                    <View style={{backgroundColor: '#556b2f'}}>
+                        <Text style={{ fontWeight: 'bold', fontSize: 18, color: 'black' }}>{item.proyecto.nombre}</Text>
+                    </View>
+                    {item.miembros.map((miembro, i) => (
+                        <Text>{miembro.nombre}</Text>
+                    ))}
+                </View>
                 )}
-                keyExtractor={item => item.alumno.id.toString()}
+                keyExtractor={item => item.proyecto.id.toString()}
              />
+            </View>
             
         </View>
     )
@@ -92,4 +107,12 @@ const RandomScreen = () => {
 
 export default RandomScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    grupos: {
+        // padding: 10,
+        margin: 20,
+        backgroundColor: 'beige',
+        borderWidth: 3,
+        borderRadius: 10
+    }
+})
