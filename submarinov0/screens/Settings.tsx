@@ -1,6 +1,7 @@
 import { Button, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { useContext, useState } from 'react'
 import { AppContext } from '../context/Context';
+import { useNavigation } from '@react-navigation/native';
 
 const SettingsScreen = () => {
     const { state, dispatch } = useContext(AppContext);
@@ -8,11 +9,15 @@ const SettingsScreen = () => {
     const  [gridSize, setGridSize] = useState(state.gridSize);
     const  [trailDuration, setTrailDuration] = useState(state.trailDuration);
 
+    const navigation = useNavigation()
+
     const prepNewGame = () => {
         dispatch({type: 'NEW GAME' ,  payload: {
             gridSize: gridSize,
             trailDuration: trailDuration
-        }})
+        }});
+
+        navigation.navigate("Game")
     }
 
   return (

@@ -7,18 +7,20 @@ import { AppProvider } from './context/Context';
 import GameScreen from './screens/GameScreen';
 import MovementsScreen from './screens/MovementsScreen';
 import SettingsScreen from './screens/Settings';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <AppProvider>
       <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen name="Settings" component={SettingsScreen} />
-          <Tab.Screen name="Game" component={GameScreen} />
-          <Tab.Screen name="History" component={MovementsScreen} />
-        </Tab.Navigator>
+        <Stack.Navigator>
+          <Stack.Screen name="Settings" component={SettingsScreen} />
+          <Stack.Screen name="Game" component={GameScreen} />
+          <Stack.Screen name="History" component={MovementsScreen} />
+        </Stack.Navigator>
       </NavigationContainer>
     </AppProvider>
   );
