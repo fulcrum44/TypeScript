@@ -15,9 +15,9 @@ export default function App() {
     <AppProvider>
       <NavigationContainer>
         <Tab.Navigator>
+          <Tab.Screen name="Settings" component={SettingsScreen} />
           <Tab.Screen name="Game" component={GameScreen} />
           <Tab.Screen name="History" component={MovementsScreen} />
-          <Tab.Screen name="Settings" component={SettingsScreen} />
         </Tab.Navigator>
       </NavigationContainer>
     </AppProvider>

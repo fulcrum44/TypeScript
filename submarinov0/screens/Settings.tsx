@@ -1,13 +1,19 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { Button, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { useContext, useState } from 'react'
 import { AppContext } from '../context/Context';
 
 const SettingsScreen = () => {
     const { state, dispatch } = useContext(AppContext);
-    
+
     const  [gridSize, setGridSize] = useState(state.gridSize);
     const  [trailDuration, setTrailDuration] = useState(state.trailDuration);
 
+    const prepNewGame = () => {
+        dispatch({type: 'NEW GAME' ,  payload: {
+            gridSize: gridSize,
+            trailDuration: trailDuration
+        }})
+    }
 
   return (
     <View style={styles.container}>
@@ -71,6 +77,14 @@ const SettingsScreen = () => {
             ]}>
             <Text style={styles.text}> + </Text>
             </Pressable>
+        </View>
+        {/* ////////////////////////////////////////////////////////////////////// */}
+        <View style={{ marginTop: 50, paddingHorizontal: 20 }}>
+            <Button 
+                title="PLAY"
+                onPress={() => prepNewGame()}
+                color="rgba(0, 34, 75, 1)"
+            />
         </View>
     </View>
   )
