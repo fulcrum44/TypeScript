@@ -7,7 +7,8 @@ import uuid from 'react-native-uuid';
 
 const AlumnoScreen = () => {
     const { state, dispatch } = useContext(AppContext);
-    console.log(state.alumnos);
+    
+
     const insertAlumn = (gato: String) => {
         dispatch({ type: "addAlumn", payload: {
             id: uuid.v4(),
