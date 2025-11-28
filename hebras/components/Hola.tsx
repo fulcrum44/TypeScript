@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Post } from '../entities/Post'
+import { ServerPost } from '../entities/mappers/ServerPost';
+import { PostMapper } from '../entities/mappers/PostMapper';
 
 const Hola = () => {
 
@@ -13,10 +15,10 @@ const Hola = () => {
             fetch("https://jsonplaceholder.typicode.com/posts").then(
                 (datos) => {
                     datos.json().then(
-                        (datos: Post[]) => {
+                        (datos: ServerPost[]) => {
                             setSaludo("Los datos se han recogido");
                             setLoading(false);
-                            setDatos(datos)
+                            setDatos(PostMapper.toPost(datos))
                         }
                     ),
                     () => {
@@ -33,11 +35,15 @@ const Hola = () => {
     }
   
   useEffect(() => {
-    
+    const saludo = () => {
+        setSaludo("Hola buenos días")
+    }
   })
 
   return (
-    saludo
+    <View>
+        <Text>{saludo}</Text>
+    </View>
   )
 }
 
